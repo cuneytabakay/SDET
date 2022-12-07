@@ -1,0 +1,20 @@
+//(//*[@class='inventory_item_price'])[1]
+        List<WebElement> ucretler=driver.findElements(By.xpath("//*[@class='inventory_item_price']"));
+
+        double toplam=0;
+        for(WebElement e: ucretler) {
+            System.out.println("e.getText() = " + e.getText());
+            toplam += Double.parseDouble(e.getText().substring(1));
+        }
+        System.out.println("toplam = " + toplam);
+
+        // double çevirme işlemleri ayrı bir metod yardımıyla regex ile yapılacak
+        WebElement webAltToplam=driver.findElement(By.xpath("//*[@class='summary_subtotal_label']"));
+        System.out.println(webAltToplam.getText());
+        double altToplam = Double.parseDouble(webAltToplam.getText().substring(13));
+        System.out.println("altToplam = " + altToplam);
+
+        if (toplam == altToplam)
+            System.out.println("test passed");
+        else
+            System.out.println("test failed");
